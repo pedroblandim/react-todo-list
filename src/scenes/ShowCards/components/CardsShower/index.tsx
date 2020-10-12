@@ -4,11 +4,11 @@ import styled from "styled-components";
 import { Todo } from "../../../../common/interfaces";
 import { TodoStatus } from "../../../../common/enum";
 
-import { debug } from "console";
-
 export interface IProps {
-	todos: Todo[];
 	currentDay: Date;
+	changeDate: (date: Date) => void;
+
+	todos: Todo[];
 	createTodo: (todo: Todo) => void;
 	updateTodo: (
 		id: number,
@@ -18,6 +18,11 @@ export interface IProps {
 	) => void;
 	deleteTodo: (id: number) => void;
 }
+
+const CardContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+`;
 
 const LeftCard = styled.div`
 	position: relative;
@@ -51,6 +56,7 @@ export const CardsShower = (props: IProps) => {
 		);
 	};
 
+	// This method converts Tasks to Todos (put this on redux)
 	const addTask = (text: string) => {
 		const todo: Todo = {
 			text: text,
@@ -76,17 +82,18 @@ export const CardsShower = (props: IProps) => {
 	};
 
 	return (
-		<>
+		<CardContainer>
 			<MiddleCard>
 				<Card
+					date={props.currentDay}
+					changeData={props.changeDate}
 					addTask={addTask}
 					updateTask={updateTask}
 					deleteTask={deleteTask}
-					date={props.currentDay}
 					tasks={getTasksOfDay(props.currentDay)}
 				/>
 			</MiddleCard>
-		</>
+		</CardContainer>
 	);
 };
 

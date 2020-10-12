@@ -5,8 +5,9 @@ import { CardHeader } from "./components/CardHeader";
 
 interface IProps {
 	date: Date;
-	tasks: ITask[];
+	changeData: (date: Date) => void;
 
+	tasks: ITask[];
 	updateTask: (id: number, text: string, status: TaskStatus) => void;
 	addTask: (text: string, date: Date) => void;
 	deleteTask: (id: number) => void;
@@ -36,7 +37,7 @@ const CardWrapper = styled.div`
 export const Card = (props: IProps) => {
 	return (
 		<CardWrapper>
-			<CardHeader date={props.date} />
+			<CardHeader changeDate={props.changeData} date={props.date} />
 			<CardBody
 				addTask={(text: string) => props.addTask(text, props.date)}
 				updateTask={props.updateTask}

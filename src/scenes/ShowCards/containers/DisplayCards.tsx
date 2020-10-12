@@ -22,14 +22,16 @@ const Container = styled.div`
 	height: 100vh;
 `;
 export const DisplayCards = () => {
+	const [currentDate, setCurrentDate] = useState<Date>(new Date());
+
 	const [todos, setTodos] = useState<Todo[]>([]);
 	useEffect(() => {
-		setTodos(getTodos(0, 10));
+		setTodos(getTodos(0, 20));
 	}, []);
 
 	const createTodoAndUpdateState = (todo: Todo) => {
 		createTodo(todo);
-		setTodos(getTodos(0, 10));
+		setTodos(getTodos(0, 20));
 	};
 
 	const updateTodoAndUpdateState = (
@@ -39,23 +41,29 @@ export const DisplayCards = () => {
 		date?: Date,
 	) => {
 		updateTodo(id, text, status, date);
-		setTodos(getTodos(0, 10));
+		setTodos(getTodos(0, 20));
 	};
 
 	const deleteTodoAndUpdate = (id: number) => {
 		console.log("deleting " + id);
 		deleteTodo(id);
-		setTodos(getTodos(0, 10));
+		setTodos(getTodos(0, 20));
+	};
+
+	const changeDate = (date: Date) => {
+		console.log("changing date to " + date);
+		setCurrentDate(date);
 	};
 
 	return (
 		<Container>
 			<CardsShower
+				currentDay={currentDate}
+				changeDate={changeDate}
 				createTodo={createTodoAndUpdateState}
 				updateTodo={updateTodoAndUpdateState}
 				deleteTodo={deleteTodoAndUpdate}
 				todos={todos}
-				currentDay={currentDay}
 			/>
 		</Container>
 	);

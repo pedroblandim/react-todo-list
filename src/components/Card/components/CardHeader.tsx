@@ -1,8 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
+import { DatePicker } from "antd";
+import moment, { Moment } from "moment";
+
+// import "moment/locale/pt-br";
+// import locale from "antd/es/date-picker/locale/pt_BR";
+
 interface IProps {
 	date: Date;
+	changeDate: (date: Date) => void;
 }
 
 const months = [
@@ -31,21 +38,28 @@ const daysOfTheWeek = [
 ];
 
 const Header = styled.div`
-	overflow: hidden;
-	padding: 8px 5px;
-	background: #4e87c4;
-	color: #fff;
-	margin-top: 10px;
-	/* border: 3px solid #4b80b97d; */
-	border-top-right-radius: 18px;
-	border-top-left-radius: 18px;
+	& input {
+		color: white;
+		font-size: 1.3rem;
+		text-align: center;
+	}
+	& > .date-picker {
+		/* overflow: hidden; */
+		padding: 8px 5px;
+		/* background: #4e87c4; */
+		margin-top: 10px;
+		font-size: 1.1rem;
 
-	font-size: 1.6rem;
+		border: none;
+	}
 	text-align: center;
-	/* border-bottom: 1px solid white; */
 `;
 
 export const CardHeader = (props: IProps) => {
+	const changeDate = (date: moment.Moment | null, dateString: string) => {
+		if (date) props.changeDate(date.toDate());
+	};
+
 	const buildText = () => {
 		const { date } = props;
 		return `
@@ -56,5 +70,23 @@ export const CardHeader = (props: IProps) => {
 		`;
 	};
 
-	return <Header>{buildText()}</Header>;
+	return (
+		// Sunday October 4, 2020
+		<>
+			{/* {buildText()} */}
+			<Header spellCheck={false}>
+				<DatePicker
+					// locale={locale}
+					bordered={false}
+					size={"middle"}
+					format={"ddd MMM Do, YYYY"}
+					allowClear={false}
+					className={"date-picker"}
+					showToday={true}
+					defaultValue={moment(new Date())}
+					onChange={changeDate}
+				/>
+			</Header>
+		</>
+	);
 };
