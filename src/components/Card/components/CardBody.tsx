@@ -1,10 +1,9 @@
-import React, { useState, ChangeEvent, FocusEvent } from "react";
+import React from "react";
 import { ITask, TaskStatus } from "../index";
 import styled from "styled-components";
-import { EditableTextInput } from "./EditableTextInput";
 
-import { createTodo } from "../../../services/Todos/repository";
 import Task from "./CardBody/components/Task";
+import { IoMdAdd } from "react-icons/io";
 
 interface IProps {
 	tasks: ITask[];
@@ -22,20 +21,6 @@ const Body = styled.div`
 	display: flex;
 	flex-direction: column;
 `;
-const TaskWrapper = styled.div`
-	box-sizing: border-box;
-	/* padding: 3px 5px; */
-	color: #000;
-	margin-bottom: 20px;
-	width: 100%;
-
-	transition: all 0.2s;
-
-	&:hover {
-		box-shadow: 0px 4px 20px 1px #3e79ba;
-		transform: translate(0px, -2px);
-	}
-`;
 
 const ButtonsContainer = styled.div``;
 
@@ -43,14 +28,14 @@ const AddTodoButton = styled.button`
 	float: right;
 	outline: none;
 	border: none;
-	width: 30px;
-	height: 30px;
+	height: 38px;
 	margin: 0px 0px 15px 0px;
-	border-radius: 50%;
-	color: black;
-	background: #97e6a2;
+	border-radius: 10%;
+	color: #446d99;
+	background: #5ce568;
 	cursor: pointer;
-	transition: background 0.2s;
+	transition: background 0.4s;
+	text-align: center;
 	&:hover {
 		background: #80ed8f;
 	}
@@ -72,7 +57,9 @@ export const CardBody = (props: IProps) => {
 				/>
 			))}
 			<ButtonsContainer>
-				<AddTodoButton onClick={createNewTask}>+</AddTodoButton>
+				<AddTodoButton onClick={createNewTask}>
+					<IoMdAdd size={25} />
+				</AddTodoButton>
 			</ButtonsContainer>
 		</Body>
 	);
