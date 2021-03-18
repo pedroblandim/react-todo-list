@@ -1,0 +1,16 @@
+# Merge request
+
+## Mudanças
+
+- Liste aqui as mudanças que o merge request fará na aplicação:
+-
+-
+-
+
+## Verificações
+
+Antes de criar o merge request verifique as seguinte coisas:
+
+- [ ] Todos os console.log utilizados para debug foram apagados
+- [ ] Não há nenhum erro no console do react
+- [ ] Não há nenhum erro ou warning no console do navegador (Exceto por componentes de terceiros.)
